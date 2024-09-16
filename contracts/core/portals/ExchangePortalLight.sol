@@ -26,9 +26,6 @@ contract ExchangePortalLight is ExchangePortalInterface, Ownable {
   // Contract for merkle tree white list verification
   IMerkleTreeTokensVerification public merkleTreeWhiteList;
 
-  // 1 inch protocol for calldata
-  address public OneInchRoute;
-
   address public WETH;
   address public uniswapRouter;
 
@@ -62,13 +59,11 @@ contract ExchangePortalLight is ExchangePortalInterface, Ownable {
   /**
   * @dev contructor
   * @param _pricePortal            address of price portal
-  * @param _OneInchRoute           address of oneInch ETH contract
   * @param _merkleTreeWhiteList    address of the IMerkleTreeWhiteList
-  * @param _WETH                   WBNB address
+  * @param _WETH                   WETH address
   */
   constructor(
     address _pricePortal,
-    address _OneInchRoute,
     address _merkleTreeWhiteList,
     address _WETH,
     address _uniswapRouter
@@ -76,7 +71,6 @@ contract ExchangePortalLight is ExchangePortalInterface, Ownable {
     public
   {
     pricePortal = IPricePortal(_pricePortal);
-    OneInchRoute = _OneInchRoute;
     merkleTreeWhiteList = IMerkleTreeTokensVerification(_merkleTreeWhiteList);
     WETH = _WETH;
     uniswapRouter = _uniswapRouter;
@@ -128,18 +122,7 @@ contract ExchangePortalLight is ExchangePortalInterface, Ownable {
       require(msg.value == 0);
     }
 
-    // trade via 1inch
-    if (_type == uint(ExchangeType.OneInchETH)){
-      receivedAmount = _tradeViaOneInchRoute(
-          address(_source),
-          address(_destination),
-          _sourceAmount,
-          _additionalData
-      );
-    }
-
-    // trade via Uniswap
-    else if(_type == uint(ExchangeType.UniswapV2)){
+    if(_type == uint(ExchangeType.UniswapV2)){
       receivedAmount = _tradeViaUniswapV2BasedDEX(
         address(_source),
         address(_destination),
@@ -176,37 +159,6 @@ contract ExchangePortalLight is ExchangePortalInterface, Ownable {
       receivedAmount,
       uint8(_type)
     );
-  }
-
-  // Facilitates trade with 1inch ETH
-  // this protocol require calldata from 1inch api
-  function _tradeViaOneInchRoute(
-    address sourceToken,
-    address destinationToken,
-    uint256 sourceAmount,
-    bytes memory _additionalData
-    )
-    private
-    returns(uint256 destinationReceived)
-  {
-     bool success;
-     // from ETH
-     if(IERC20(sourceToken) == IERC20(0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE)) {
-       (success, ) = OneInchRoute.call.value(sourceAmount)(
-         _additionalData
-       );
-     }
-     // from ERC20
-     else {
-       _transferFromSenderAndApproveTo(IERC20(sourceToken), sourceAmount, OneInchRoute);
-       (success, ) = OneInchRoute.call(
-         _additionalData
-       );
-     }
-     // check trade status
-     require(success, "Fail 1inch call");
-     // get received amount
-     destinationReceived = tokenBalance(IERC20(destinationToken));
   }
 
   function _tradeViaUniswapV2BasedDEX(
@@ -383,11 +335,6 @@ contract ExchangePortalLight is ExchangePortalInterface, Ownable {
   // owner can change price portal
   function setNewPricePortal(address _pricePortal) external onlyOwner {
     pricePortal = IPricePortal(_pricePortal);
-  }
-
-  // owner can set new 1inch router
-  function setNewOneInchRouter(address _OneInchRoute) external onlyOwner {
-    OneInchRoute = _OneInchRoute;
   }
 
   // fallback payable function to receive ether from other contract addresses
