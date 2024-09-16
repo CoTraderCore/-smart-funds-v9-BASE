@@ -53,4 +53,19 @@ WETH
 
 https://basescan.org/address/0x4200000000000000000000000000000000000006#code
 
+
+UNI v2 factory 
+
+https://basescan.org/address/0x8909Dc15e40173Ff4699343b6eB8132c65e18eC6#code
+
+
+Price Portal 
+
+https://basescan.org/address/0x3aE392A4c6a99FcB991E208f9D74618fff513834#code
+
+
+Exchange Portal 
+
+https://basescan.org/address/0x6F553184C04a4aD0b3551A4ff60FB73BB6E90408#code
+
 ```
