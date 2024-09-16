@@ -78,4 +78,9 @@ Smart Funds ERC20 factory
 
 https://basescan.org/address/0x3e3C06d526b38F67D7a897Bba20906f36D2793A3#code
 
+
+Permitted addresses 
+
+https://basescan.org/address/0x9674ce5043606eCEE025240B7EF78fe76C8c75A6#code
+
 ```
