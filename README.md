@@ -73,4 +73,9 @@ Smart Funds ETH factory
 
 https://basescan.org/address/0x992F6c414A6DA6A7470dfB9D61eFc6639e9fbb0E#code
 
+
+Smart Funds ERC20 factory
+
+https://basescan.org/address/0x3e3C06d526b38F67D7a897Bba20906f36D2793A3#code
+
 ```
