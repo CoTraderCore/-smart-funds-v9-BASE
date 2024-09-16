@@ -68,4 +68,9 @@ Exchange Portal
 
 https://basescan.org/address/0x6F553184C04a4aD0b3551A4ff60FB73BB6E90408#code
 
+
+Smart Funds ETH factory 
+
+https://basescan.org/address/0x992F6c414A6DA6A7470dfB9D61eFc6639e9fbb0E#code
+
 ```
