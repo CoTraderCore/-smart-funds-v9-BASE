@@ -83,4 +83,9 @@ Permitted addresses
 
 https://basescan.org/address/0x9674ce5043606eCEE025240B7EF78fe76C8c75A6#code
 
+
+Smart Funds Registry
+
+https://basescan.org/address/0xEEce063BB21E231B2b9981Ca254B19b651aDb021#code
+
 ```
