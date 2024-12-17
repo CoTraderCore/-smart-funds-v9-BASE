@@ -19,7 +19,7 @@ import "../../uniswap/interfaces/IUniswapV2Router.sol";
 import "../interfaces/IWhaleX.sol";
 
 
-contract ExchangePortalLight is ExchangePortalInterface, Ownable {
+contract ExchangePortalLightV2 is ExchangePortalInterface, Ownable {
   using SafeMath for uint256;
 
   uint public version = 6;
@@ -137,9 +137,9 @@ contract ExchangePortalLight is ExchangePortalInterface, Ownable {
 
     else if(_type == uint(ExchangeType.WhaleX)){
       receivedAmount = _tradeViaWhaleX(
-        sourceToken,
-        destinationToken,
-        sourceAmount
+        address(_source),
+        address(_destination),
+        _sourceAmount
       );
     }
     // unknown exchange type
