@@ -88,4 +88,9 @@ Smart Funds Registry
 
 https://basescan.org/address/0xEEce063BB21E231B2b9981Ca254B19b651aDb021#code
 
+
+Exchange portal light v2 (with WhaleX)
+
+https://basescan.org/address/0x10f02A8aEd8CBa0EF5D13030312dac1F41a39410#code
+
 ```
